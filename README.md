@@ -1,6 +1,6 @@
 # trucky-nix
 
-Nix Flake for [trucky](https://truckyapp.com/)
+Nix Flake for [Trucky](https://truckyapp.com/)
 
 ## Usage
 Run without installing:
