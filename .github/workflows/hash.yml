@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-pkg:
-    name: Build Nix package
+  update-hash:
+    name: Update AppImage hash
     runs-on: ubuntu-latest
     permissions:
       id-token: write
