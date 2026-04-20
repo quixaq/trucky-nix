@@ -1,0 +1,36 @@
+on:
+  schedule:
+    - cron: "19 7 * * *"
+
+jobs:
+  build-pkg:
+    name: Build Nix package
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.2
+      - name: get nix
+        uses: DeterminateSystems/determinate-nix-action@main
+      - name: get the hash
+        run: |
+          echo "TRUCKY_HASH=$(nix hash to-sri --type sha256 $(curl -sL -A 'Mozilla/5.0' \
+          https://client-download.truckyapp.com/linux/latest/Trucky.AppImage | \
+          nix-prefetch-url file:///dev/stdin | head -n1))" >> $GITHUB_ENV
+      - name: replace the hash in the file
+        run: |
+          sed -i "/# update-target/s|hash = \"[^\"]*\";@hash = \"$TRUCKY_HASH\";@" flake.nix
+      - name: commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "chore: update hash"
+            git push
+          else
+            echo "The hash hasn't changed, not updating"
+          fi
