@@ -23,7 +23,7 @@ jobs:
           nix-prefetch-url file:///dev/stdin | head -n1))" >> $GITHUB_ENV
       - name: replace the hash in the file
         run: |
-          sed -i "/# update-target/s|hash = \"[^\"]*\";@hash = \"$TRUCKY_HASH\";@" flake.nix
+          sed -i "/# update-target/s@hash = \"[^\"]*\";@hash = \"$TRUCKY_HASH\";@" flake.nix
       - name: commit changes
         run: |
           git config --global user.name "github-actions[bot]"
