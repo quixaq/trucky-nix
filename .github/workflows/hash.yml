@@ -1,3 +1,4 @@
+name: Update AppImage hash
 on:
   schedule:
     - cron: "19 7 * * *"
