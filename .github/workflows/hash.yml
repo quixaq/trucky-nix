@@ -2,6 +2,7 @@ name: Update AppImage hash
 on:
   schedule:
     - cron: "19 7 * * *"
+  workflow_dispatch:
 
 jobs:
   build-pkg:
