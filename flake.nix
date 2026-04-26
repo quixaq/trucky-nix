@@ -41,7 +41,7 @@
           version = "latest";
           src = pkgs.fetchurl {
             url = "https://client-download.truckyapp.com/linux/latest/Trucky.AppImage";
-            hash = "sha256-V4wKsBMfv5jjciMOYJTCQ5JEIsxQqFH4iiEgm0z+gNc="; # update-target
+            hash = "sha256-ayJ9F16+tn5hRuf1FtR15Z63mr15uzdoIdWOYiU2S6E="; # update-target
             curlOpts = "-L -A 'Mozilla/5.0'";
           };
 
